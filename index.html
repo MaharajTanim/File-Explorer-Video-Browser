@@ -272,6 +272,13 @@
     </div>
 
     <script>
+        
+        const videoExtensions = [
+            'mp4', 'webm', 'ogg', 'mov', 
+            'avi', 'mkv', 'flv', 'wmv', 
+            'm4v', '3gp', 'mpeg', 'mpg'
+        ];
+
         async function readDirectory(directoryHandle) {
             const files = [];
             for await (const entry of directoryHandle.values()) {
@@ -280,14 +287,16 @@
                     files.push(...subFiles);
                 } else {
                     const file = await entry.getFile();
-                    if (file.type.startsWith('video/')) {
+                    const ext = file.name.split('.').pop().toLowerCase();
+                    
+                    // Check both MIME type and file extension
+                    if (file.type.startsWith('video/') || videoExtensions.includes(ext)) {
                         files.push({ file, handle: entry });
                     }
                 }
             }
             return files;
         }
-
         async function displayVideos(videos) {
             const container = document.getElementById('videoContainer');
             container.innerHTML = '';
