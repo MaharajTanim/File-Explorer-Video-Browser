@@ -6,6 +6,7 @@ A simple web app to browse and play video files from a local folder.
 - Select a folder to scan for video files.
 - View video details (name, type, size).
 - Play videos in a modal.
+---
 
 ## Usage
 1. Open `index.html` in a modern browser (Chrome/Edge).
